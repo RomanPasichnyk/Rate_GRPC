@@ -46,12 +46,14 @@ public final class RateStreaming {
       "\n\024rate_streaming.proto\022\010com.rate\"+\n\013Rate" +
       "Request\022\034\n\004bank\030\001 \001(\0132\016.com.rate.Bank\"\024\n" +
       "\004Bank\022\014\n\004name\030\001 \001(\t\"2\n\014RateResponse\022\"\n\nc" +
-      "urrencies\030\001 \003(\0132\016.com.rate.Rate\";\n\004Rate\022" +
-      "$\n\010currency\030\001 \001(\0162\022.com.rate.Currency\022\r\n" +
-      "\005value\030\002 \001(\002*%\n\010Currency\022\007\n\003EUR\020\000\022\007\n\003USD" +
-      "\020\001\022\007\n\003RUB\020\0022T\n\024RateStreamingService\022<\n\007o" +
-      "bserve\022\025.com.rate.RateRequest\032\026.com.rate" +
-      ".RateResponse(\0010\001B\014\n\010com.rateP\001b\006proto3"
+      "urrencies\030\001 \003(\0132\016.com.rate.Rate\"g\n\004Rate\022" +
+      "(\n\014fromCurrency\030\001 \001(\0162\022.com.rate.Currenc" +
+      "y\022&\n\ntoCurrency\030\002 \001(\0162\022.com.rate.Currenc" +
+      "y\022\r\n\005value\030\003 \001(\002*.\n\010Currency\022\007\n\003EUR\020\000\022\007\n" +
+      "\003USD\020\001\022\007\n\003RUB\020\002\022\007\n\003UAH\020\0032T\n\024RateStreamin" +
+      "gService\022<\n\007observe\022\025.com.rate.RateReque" +
+      "st\032\026.com.rate.RateResponse(\0010\001B\014\n\010com.ra",
+      "teP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -88,7 +90,7 @@ public final class RateStreaming {
     internal_static_com_rate_Rate_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_rate_Rate_descriptor,
-        new java.lang.String[] { "Currency", "Value", });
+        new java.lang.String[] { "FromCurrency", "ToCurrency", "Value", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

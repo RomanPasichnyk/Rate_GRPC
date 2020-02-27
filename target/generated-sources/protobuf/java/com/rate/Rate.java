@@ -16,7 +16,8 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private Rate() {
-    currency_ = 0;
+    fromCurrency_ = 0;
+    toCurrency_ = 0;
     value_ = 0F;
   }
 
@@ -51,10 +52,16 @@ private static final long serialVersionUID = 0L;
           case 8: {
             int rawValue = input.readEnum();
 
-            currency_ = rawValue;
+            fromCurrency_ = rawValue;
             break;
           }
-          case 21: {
+          case 16: {
+            int rawValue = input.readEnum();
+
+            toCurrency_ = rawValue;
+            break;
+          }
+          case 29: {
 
             value_ = input.readFloat();
             break;
@@ -83,26 +90,42 @@ private static final long serialVersionUID = 0L;
             com.rate.Rate.class, com.rate.Rate.Builder.class);
   }
 
-  public static final int CURRENCY_FIELD_NUMBER = 1;
-  private int currency_;
+  public static final int FROMCURRENCY_FIELD_NUMBER = 1;
+  private int fromCurrency_;
   /**
-   * <code>.com.rate.Currency currency = 1;</code>
+   * <code>.com.rate.Currency fromCurrency = 1;</code>
    */
-  public int getCurrencyValue() {
-    return currency_;
+  public int getFromCurrencyValue() {
+    return fromCurrency_;
   }
   /**
-   * <code>.com.rate.Currency currency = 1;</code>
+   * <code>.com.rate.Currency fromCurrency = 1;</code>
    */
-  public com.rate.Currency getCurrency() {
-    com.rate.Currency result = com.rate.Currency.valueOf(currency_);
+  public com.rate.Currency getFromCurrency() {
+    com.rate.Currency result = com.rate.Currency.valueOf(fromCurrency_);
     return result == null ? com.rate.Currency.UNRECOGNIZED : result;
   }
 
-  public static final int VALUE_FIELD_NUMBER = 2;
+  public static final int TOCURRENCY_FIELD_NUMBER = 2;
+  private int toCurrency_;
+  /**
+   * <code>.com.rate.Currency toCurrency = 2;</code>
+   */
+  public int getToCurrencyValue() {
+    return toCurrency_;
+  }
+  /**
+   * <code>.com.rate.Currency toCurrency = 2;</code>
+   */
+  public com.rate.Currency getToCurrency() {
+    com.rate.Currency result = com.rate.Currency.valueOf(toCurrency_);
+    return result == null ? com.rate.Currency.UNRECOGNIZED : result;
+  }
+
+  public static final int VALUE_FIELD_NUMBER = 3;
   private float value_;
   /**
-   * <code>float value = 2;</code>
+   * <code>float value = 3;</code>
    */
   public float getValue() {
     return value_;
@@ -120,11 +143,14 @@ private static final long serialVersionUID = 0L;
 
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (currency_ != com.rate.Currency.EUR.getNumber()) {
-      output.writeEnum(1, currency_);
+    if (fromCurrency_ != com.rate.Currency.EUR.getNumber()) {
+      output.writeEnum(1, fromCurrency_);
+    }
+    if (toCurrency_ != com.rate.Currency.EUR.getNumber()) {
+      output.writeEnum(2, toCurrency_);
     }
     if (value_ != 0F) {
-      output.writeFloat(2, value_);
+      output.writeFloat(3, value_);
     }
     unknownFields.writeTo(output);
   }
@@ -134,13 +160,17 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (currency_ != com.rate.Currency.EUR.getNumber()) {
+    if (fromCurrency_ != com.rate.Currency.EUR.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
-        .computeEnumSize(1, currency_);
+        .computeEnumSize(1, fromCurrency_);
+    }
+    if (toCurrency_ != com.rate.Currency.EUR.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(2, toCurrency_);
     }
     if (value_ != 0F) {
       size += com.google.protobuf.CodedOutputStream
-        .computeFloatSize(2, value_);
+        .computeFloatSize(3, value_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -158,7 +188,8 @@ private static final long serialVersionUID = 0L;
     com.rate.Rate other = (com.rate.Rate) obj;
 
     boolean result = true;
-    result = result && currency_ == other.currency_;
+    result = result && fromCurrency_ == other.fromCurrency_;
+    result = result && toCurrency_ == other.toCurrency_;
     result = result && (
         java.lang.Float.floatToIntBits(getValue())
         == java.lang.Float.floatToIntBits(
@@ -174,8 +205,10 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + CURRENCY_FIELD_NUMBER;
-    hash = (53 * hash) + currency_;
+    hash = (37 * hash) + FROMCURRENCY_FIELD_NUMBER;
+    hash = (53 * hash) + fromCurrency_;
+    hash = (37 * hash) + TOCURRENCY_FIELD_NUMBER;
+    hash = (53 * hash) + toCurrency_;
     hash = (37 * hash) + VALUE_FIELD_NUMBER;
     hash = (53 * hash) + java.lang.Float.floatToIntBits(
         getValue());
@@ -308,7 +341,9 @@ private static final long serialVersionUID = 0L;
     }
     public Builder clear() {
       super.clear();
-      currency_ = 0;
+      fromCurrency_ = 0;
+
+      toCurrency_ = 0;
 
       value_ = 0F;
 
@@ -334,7 +369,8 @@ private static final long serialVersionUID = 0L;
 
     public com.rate.Rate buildPartial() {
       com.rate.Rate result = new com.rate.Rate(this);
-      result.currency_ = currency_;
+      result.fromCurrency_ = fromCurrency_;
+      result.toCurrency_ = toCurrency_;
       result.value_ = value_;
       onBuilt();
       return result;
@@ -377,8 +413,11 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.rate.Rate other) {
       if (other == com.rate.Rate.getDefaultInstance()) return this;
-      if (other.currency_ != 0) {
-        setCurrencyValue(other.getCurrencyValue());
+      if (other.fromCurrency_ != 0) {
+        setFromCurrencyValue(other.getFromCurrencyValue());
+      }
+      if (other.toCurrency_ != 0) {
+        setToCurrencyValue(other.getToCurrencyValue());
       }
       if (other.getValue() != 0F) {
         setValue(other.getValue());
@@ -410,59 +449,103 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private int currency_ = 0;
+    private int fromCurrency_ = 0;
     /**
-     * <code>.com.rate.Currency currency = 1;</code>
+     * <code>.com.rate.Currency fromCurrency = 1;</code>
      */
-    public int getCurrencyValue() {
-      return currency_;
+    public int getFromCurrencyValue() {
+      return fromCurrency_;
     }
     /**
-     * <code>.com.rate.Currency currency = 1;</code>
+     * <code>.com.rate.Currency fromCurrency = 1;</code>
      */
-    public Builder setCurrencyValue(int value) {
-      currency_ = value;
+    public Builder setFromCurrencyValue(int value) {
+      fromCurrency_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>.com.rate.Currency currency = 1;</code>
+     * <code>.com.rate.Currency fromCurrency = 1;</code>
      */
-    public com.rate.Currency getCurrency() {
-      com.rate.Currency result = com.rate.Currency.valueOf(currency_);
+    public com.rate.Currency getFromCurrency() {
+      com.rate.Currency result = com.rate.Currency.valueOf(fromCurrency_);
       return result == null ? com.rate.Currency.UNRECOGNIZED : result;
     }
     /**
-     * <code>.com.rate.Currency currency = 1;</code>
+     * <code>.com.rate.Currency fromCurrency = 1;</code>
      */
-    public Builder setCurrency(com.rate.Currency value) {
+    public Builder setFromCurrency(com.rate.Currency value) {
       if (value == null) {
         throw new NullPointerException();
       }
       
-      currency_ = value.getNumber();
+      fromCurrency_ = value.getNumber();
       onChanged();
       return this;
     }
     /**
-     * <code>.com.rate.Currency currency = 1;</code>
+     * <code>.com.rate.Currency fromCurrency = 1;</code>
      */
-    public Builder clearCurrency() {
+    public Builder clearFromCurrency() {
       
-      currency_ = 0;
+      fromCurrency_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int toCurrency_ = 0;
+    /**
+     * <code>.com.rate.Currency toCurrency = 2;</code>
+     */
+    public int getToCurrencyValue() {
+      return toCurrency_;
+    }
+    /**
+     * <code>.com.rate.Currency toCurrency = 2;</code>
+     */
+    public Builder setToCurrencyValue(int value) {
+      toCurrency_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.com.rate.Currency toCurrency = 2;</code>
+     */
+    public com.rate.Currency getToCurrency() {
+      com.rate.Currency result = com.rate.Currency.valueOf(toCurrency_);
+      return result == null ? com.rate.Currency.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.com.rate.Currency toCurrency = 2;</code>
+     */
+    public Builder setToCurrency(com.rate.Currency value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      
+      toCurrency_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.com.rate.Currency toCurrency = 2;</code>
+     */
+    public Builder clearToCurrency() {
+      
+      toCurrency_ = 0;
       onChanged();
       return this;
     }
 
     private float value_ ;
     /**
-     * <code>float value = 2;</code>
+     * <code>float value = 3;</code>
      */
     public float getValue() {
       return value_;
     }
     /**
-     * <code>float value = 2;</code>
+     * <code>float value = 3;</code>
      */
     public Builder setValue(float value) {
       
@@ -471,7 +554,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>float value = 2;</code>
+     * <code>float value = 3;</code>
      */
     public Builder clearValue() {
       

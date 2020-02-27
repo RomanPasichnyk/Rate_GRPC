@@ -69,7 +69,7 @@ public class RateStreamingClient {
 
     public static void buyMoneyByUah(RateResponse rateResponse) {
         float currentPrice = rateResponse.getCurrencies(0).getValue() * AMOUNT_OF_CURRENCY;
-        Currency currencyType = rateResponse.getCurrencies(0).getCurrency();
+        Currency currencyType = rateResponse.getCurrencies(0).getToCurrency();
 
         if (user.getUah() >= currentPrice && rateResponse.getCurrencies(0).getValue() <= buyCurrencyMinLimits.get(currencyType)) {
             user.increasedCurrency(currencyType, AMOUNT_OF_CURRENCY);

@@ -18,7 +18,6 @@ public class RateStreamingService extends RateStreamingServiceGrpc.RateStreaming
     private final RateEuroStreamingService euroService;
     private final RateRubStreamingService rubService;
 
-
     public RateStreamingService(RateUSDStreamingService usdService, RateEuroStreamingService euroService, RateRubStreamingService rubService) {
         this.usdService = usdService;
         this.euroService = euroService;
@@ -32,7 +31,6 @@ public class RateStreamingService extends RateStreamingServiceGrpc.RateStreaming
         AutoClosableLock lock = new AutoClosableLock(new ReentrantLock());
         StreamObserver<Bank> rateUSDClientStream =
                 usdService.observe(newStreamObserver(responseObserver, lock, Builder::addCurrencies));
-
         StreamObserver<Bank> rateEuroClientStream =
                 euroService.observe(newStreamObserver(responseObserver, lock, Builder::addCurrencies));
         StreamObserver<Bank> rateRubClientStream =

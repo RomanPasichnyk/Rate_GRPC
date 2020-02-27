@@ -20,6 +20,10 @@ public enum Currency
    * <code>RUB = 2;</code>
    */
   RUB(2),
+  /**
+   * <code>UAH = 3;</code>
+   */
+  UAH(3),
   UNRECOGNIZED(-1),
   ;
 
@@ -35,6 +39,10 @@ public enum Currency
    * <code>RUB = 2;</code>
    */
   public static final int RUB_VALUE = 2;
+  /**
+   * <code>UAH = 3;</code>
+   */
+  public static final int UAH_VALUE = 3;
 
 
   public final int getNumber() {
@@ -58,6 +66,7 @@ public enum Currency
       case 0: return EUR;
       case 1: return USD;
       case 2: return RUB;
+      case 3: return UAH;
       default: return null;
     }
   }
