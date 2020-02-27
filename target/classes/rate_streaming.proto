@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.rate";
+package com.rate;
+
+message RateRequest{
+    Bank bank = 1;
+}
+
+message Bank {
+    string name = 1;
+}
+
+message RateResponse {
+    repeated Rate currencies = 1;
+}
+enum Currency {
+    EUR = 0;
+    USD = 1;
+    RUB = 2;
+}
+
+message Rate {
+    Currency currency = 1;
+    float value = 2;
+}
+
+service RateStreamingService {
+    rpc observe(stream RateRequest) returns (stream RateResponse);
+}
