@@ -4,13 +4,6 @@ import com.rate.*;
 import com.rate.providers.CurrencyProvider;
 import io.grpc.stub.StreamObserver;
 
-import java.util.Random;
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
-
 public class RateValuesStreamer {
 
 //    private final Set<StreamObserver<Rate>> observers = ConcurrentHashMap.newKeySet();
@@ -38,7 +31,7 @@ public class RateValuesStreamer {
                     generateValueTask.setTo(rateRequest.getTo());
                 }
 
-                generateValueTask.addOberverIfAbsent(responseObserver);
+                generateValueTask.addObserverIfAbsent(responseObserver);
 //                responseObserver.onNext(currencyProvider.getRate(rateRequest.getFrom(), rateRequest.getTo(), rateRequest.getBank().getName()));
             }
 

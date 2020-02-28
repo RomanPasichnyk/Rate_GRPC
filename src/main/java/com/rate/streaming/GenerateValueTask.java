@@ -53,7 +53,7 @@ public class GenerateValueTask extends TimerTask {
         this.bankName = bankName;
     }
 
-    public void addOberverIfAbsent(StreamObserver<Rate> responseObserver) {
+    public void addObserverIfAbsent(StreamObserver<Rate> responseObserver) {
         observers.add(responseObserver);
     }
 
@@ -67,12 +67,10 @@ public class GenerateValueTask extends TimerTask {
         if (!isScheduled) {
             long randomDelayInMillis = TimeUnit.SECONDS.toMillis(1 + new Random().nextInt(4));
             Timer timer = new Timer();
-            timer.schedule(new GenerateValueTask(from, to, bankName), randomDelayInMillis, randomDelayInMillis);
+            timer.schedule(this, randomDelayInMillis, randomDelayInMillis);
             isScheduled = true;
         }
     }
 
-    public void startTest(StreamObserver<Rate> responseObserver, RateRequest rateRequest) {
-        responseObserver.onNext(currencyProvider.getRate(rateRequest.getFrom(), rateRequest.getTo(), rateRequest.getBank().getName()));
-    }
+
 }
