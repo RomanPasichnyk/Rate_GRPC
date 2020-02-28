@@ -17,7 +17,7 @@ public class CurrencyProvider {
 
     public Rate getRate(Currency from, Currency to) {
         float value = rateToUSD.get(to) / rateToUSD.get(from);
-        return Rate.newBuilder().setFromCurrency(from).setToCurrency(to).setValue(value).build();
+        return Rate.newBuilder().setFrom(from).setTo(to).setValue(value).build();
     }
 
     public void initRateToUSD() {
