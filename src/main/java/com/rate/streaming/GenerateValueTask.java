@@ -2,6 +2,7 @@ package com.rate.streaming;
 
 import com.rate.Currency;
 import com.rate.Rate;
+import com.rate.RateRequest;
 import com.rate.providers.CurrencyProvider;
 import io.grpc.stub.StreamObserver;
 
@@ -69,5 +70,9 @@ public class GenerateValueTask extends TimerTask {
             timer.schedule(new GenerateValueTask(from, to, bankName), randomDelayInMillis, randomDelayInMillis);
             isScheduled = true;
         }
+    }
+
+    public void startTest(StreamObserver<Rate> responseObserver, RateRequest rateRequest) {
+        responseObserver.onNext(currencyProvider.getRate(rateRequest.getFrom(), rateRequest.getTo(), rateRequest.getBank().getName()));
     }
 }

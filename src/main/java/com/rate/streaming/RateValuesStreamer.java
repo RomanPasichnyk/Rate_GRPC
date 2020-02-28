@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class RateValuesStreamer {
 
-    private final Set<StreamObserver<Rate>> observers = ConcurrentHashMap.newKeySet();
+//    private final Set<StreamObserver<Rate>> observers = ConcurrentHashMap.newKeySet();
     private final CurrencyProvider currencyProvider;
     private GenerateValueTask generateValueTask;
 
