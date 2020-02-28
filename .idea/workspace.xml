@@ -1,27 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cadac884-7b9f-409f-b906-ebc056fe2229" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/providers/CurrencyProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rate/providers/CurrencyProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/providers/USDProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/streaming/BankDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rate/streaming/BankGrabber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateGrabber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateGrabber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateStreamingClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateStreamingClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateStreamingServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateStreamingServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateStreamingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateStreamingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateUSDStreamingService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/streaming/UkrsibRateGrabber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rate/streaming/UkrsibRateGrabber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/proto/rate_streaming.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/proto/rate_streaming.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/rate/streaming/RateGrabber.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/rate_streaming.proto" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rate_streaming.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/protobuf/java/com/rate/Currency.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/protobuf/java/com/rate/Currency.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/protobuf/java/com/rate/Rate.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/protobuf/java/com/rate/Rate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/protobuf/java/com/rate/RateOrBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/protobuf/java/com/rate/RateOrBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/protobuf/java/com/rate/RateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/protobuf/java/com/rate/RateRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/protobuf/java/com/rate/RateRequestOrBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/protobuf/java/com/rate/RateRequestOrBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/protobuf/java/com/rate/RateStreaming.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/protobuf/java/com/rate/RateStreaming.java" afterDir="false" />
-    </list>
+    <list default="true" id="cadac884-7b9f-409f-b906-ebc056fe2229" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,17 +13,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="develop" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
@@ -63,15 +37,10 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../kurs" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.rate.streaming" />
-    </key>
   </component>
   <component name="RunManager" selected="Application.RateStreamingClient">
     <configuration name="RateStreamingClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -104,8 +73,6 @@
       <list>
         <item itemvalue="Application.RateStreamingClient" />
         <item itemvalue="Application.RateStreamingServer" />
-        <item itemvalue="Application.RateStreamingClient" />
-        <item itemvalue="Application.RateStreamingServer" />
       </list>
     </recent_temporary>
   </component>
@@ -127,10 +94,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582707166078" />
-    <state x="2685" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1582870179090">
+    <state x="2685" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1582728256605">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2685" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582870179090" />
+    <state x="2685" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582728256605" />
     <state x="2396" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1582714404514">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -143,26 +110,26 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2660" y="275" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582719851457" />
-    <state width="1877" height="216" key="GridCell.Tab.0.bottom" timestamp="1582872819638">
+    <state width="1877" height="373" key="GridCell.Tab.0.bottom" timestamp="1582791386656">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="281" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1582733202557" />
-    <state width="1877" height="216" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582872819638" />
-    <state width="1877" height="216" key="GridCell.Tab.0.center" timestamp="1582872819637">
+    <state width="1877" height="373" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582791386656" />
+    <state width="1877" height="373" key="GridCell.Tab.0.center" timestamp="1582791386656">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="281" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1582733202556" />
-    <state width="1877" height="216" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582872819637" />
-    <state width="1877" height="216" key="GridCell.Tab.0.left" timestamp="1582872819637">
+    <state width="1877" height="373" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582791386656" />
+    <state width="1877" height="373" key="GridCell.Tab.0.left" timestamp="1582791386656">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="281" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1582733202556" />
-    <state width="1877" height="216" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582872819637" />
-    <state width="1877" height="216" key="GridCell.Tab.0.right" timestamp="1582872819637">
+    <state width="1877" height="373" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582791386656" />
+    <state width="1877" height="373" key="GridCell.Tab.0.right" timestamp="1582791386656">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="281" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1582733202556" />
-    <state width="1877" height="216" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582872819637" />
+    <state width="1877" height="373" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582791386656" />
     <state width="1875" height="220" key="GridCell.Tab.1.bottom" timestamp="1582733202552">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -183,10 +150,6 @@
     </state>
     <state width="1875" height="220" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1582733202551" />
     <state width="1875" height="220" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582731279382" />
-    <state x="2381" y="162" key="SettingsEditor" timestamp="1582817777594">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2381" y="162" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582817777594" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1582716896558">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -195,21 +158,17 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2576" y="252" width="607" height="536" key="find.popup/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582703611521" />
-    <state x="2661" y="233" key="git4idea.branch.GitSmartOperationDialog" timestamp="1582811037603">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2661" y="233" key="git4idea.branch.GitSmartOperationDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582811037603" />
     <state x="2622" y="139" key="refactoring.ChangeSignatureDialog" timestamp="1582612235810">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2622" y="139" key="refactoring.ChangeSignatureDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582612235810" />
-    <state x="2536" y="240" key="run.anything.popup" timestamp="1582870773923">
+    <state x="2536" y="240" key="run.anything.popup" timestamp="1582710719989">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2536" y="240" key="run.anything.popup/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582870773923" />
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1582817703512">
+    <state x="2536" y="240" key="run.anything.popup/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582710719989" />
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1582715177152">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582817703512" />
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582715177152" />
   </component>
 </project>
