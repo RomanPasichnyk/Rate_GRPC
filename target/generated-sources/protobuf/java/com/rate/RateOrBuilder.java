@@ -8,22 +8,22 @@ public interface RateOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.com.rate.Currency fromCurrency = 1;</code>
+   * <code>.com.rate.Currency from = 1;</code>
    */
-  int getFromCurrencyValue();
+  int getFromValue();
   /**
-   * <code>.com.rate.Currency fromCurrency = 1;</code>
+   * <code>.com.rate.Currency from = 1;</code>
    */
-  com.rate.Currency getFromCurrency();
+  com.rate.Currency getFrom();
 
   /**
-   * <code>.com.rate.Currency toCurrency = 2;</code>
+   * <code>.com.rate.Currency to = 2;</code>
    */
-  int getToCurrencyValue();
+  int getToValue();
   /**
-   * <code>.com.rate.Currency toCurrency = 2;</code>
+   * <code>.com.rate.Currency to = 2;</code>
    */
-  com.rate.Currency getToCurrency();
+  com.rate.Currency getTo();
 
   /**
    * <code>float value = 3;</code>

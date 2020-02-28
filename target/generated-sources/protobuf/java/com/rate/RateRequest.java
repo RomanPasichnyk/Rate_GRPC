@@ -16,6 +16,8 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private RateRequest() {
+    from_ = 0;
+    to_ = 0;
   }
 
   @java.lang.Override
@@ -57,6 +59,18 @@ private static final long serialVersionUID = 0L;
               bank_ = subBuilder.buildPartial();
             }
 
+            break;
+          }
+          case 16: {
+            int rawValue = input.readEnum();
+
+            from_ = rawValue;
+            break;
+          }
+          case 24: {
+            int rawValue = input.readEnum();
+
+            to_ = rawValue;
             break;
           }
         }
@@ -104,6 +118,38 @@ private static final long serialVersionUID = 0L;
     return getBank();
   }
 
+  public static final int FROM_FIELD_NUMBER = 2;
+  private int from_;
+  /**
+   * <code>.com.rate.Currency from = 2;</code>
+   */
+  public int getFromValue() {
+    return from_;
+  }
+  /**
+   * <code>.com.rate.Currency from = 2;</code>
+   */
+  public com.rate.Currency getFrom() {
+    com.rate.Currency result = com.rate.Currency.valueOf(from_);
+    return result == null ? com.rate.Currency.UNRECOGNIZED : result;
+  }
+
+  public static final int TO_FIELD_NUMBER = 3;
+  private int to_;
+  /**
+   * <code>.com.rate.Currency to = 3;</code>
+   */
+  public int getToValue() {
+    return to_;
+  }
+  /**
+   * <code>.com.rate.Currency to = 3;</code>
+   */
+  public com.rate.Currency getTo() {
+    com.rate.Currency result = com.rate.Currency.valueOf(to_);
+    return result == null ? com.rate.Currency.UNRECOGNIZED : result;
+  }
+
   private byte memoizedIsInitialized = -1;
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
@@ -119,6 +165,12 @@ private static final long serialVersionUID = 0L;
     if (bank_ != null) {
       output.writeMessage(1, getBank());
     }
+    if (from_ != com.rate.Currency.EUR.getNumber()) {
+      output.writeEnum(2, from_);
+    }
+    if (to_ != com.rate.Currency.EUR.getNumber()) {
+      output.writeEnum(3, to_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -130,6 +182,14 @@ private static final long serialVersionUID = 0L;
     if (bank_ != null) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(1, getBank());
+    }
+    if (from_ != com.rate.Currency.EUR.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(2, from_);
+    }
+    if (to_ != com.rate.Currency.EUR.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(3, to_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -152,6 +212,8 @@ private static final long serialVersionUID = 0L;
       result = result && getBank()
           .equals(other.getBank());
     }
+    result = result && from_ == other.from_;
+    result = result && to_ == other.to_;
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -167,6 +229,10 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + BANK_FIELD_NUMBER;
       hash = (53 * hash) + getBank().hashCode();
     }
+    hash = (37 * hash) + FROM_FIELD_NUMBER;
+    hash = (53 * hash) + from_;
+    hash = (37 * hash) + TO_FIELD_NUMBER;
+    hash = (53 * hash) + to_;
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -302,6 +368,10 @@ private static final long serialVersionUID = 0L;
         bank_ = null;
         bankBuilder_ = null;
       }
+      from_ = 0;
+
+      to_ = 0;
+
       return this;
     }
 
@@ -329,6 +399,8 @@ private static final long serialVersionUID = 0L;
       } else {
         result.bank_ = bankBuilder_.build();
       }
+      result.from_ = from_;
+      result.to_ = to_;
       onBuilt();
       return result;
     }
@@ -372,6 +444,12 @@ private static final long serialVersionUID = 0L;
       if (other == com.rate.RateRequest.getDefaultInstance()) return this;
       if (other.hasBank()) {
         mergeBank(other.getBank());
+      }
+      if (other.from_ != 0) {
+        setFromValue(other.getFromValue());
+      }
+      if (other.to_ != 0) {
+        setToValue(other.getToValue());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -515,6 +593,94 @@ private static final long serialVersionUID = 0L;
         bank_ = null;
       }
       return bankBuilder_;
+    }
+
+    private int from_ = 0;
+    /**
+     * <code>.com.rate.Currency from = 2;</code>
+     */
+    public int getFromValue() {
+      return from_;
+    }
+    /**
+     * <code>.com.rate.Currency from = 2;</code>
+     */
+    public Builder setFromValue(int value) {
+      from_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.com.rate.Currency from = 2;</code>
+     */
+    public com.rate.Currency getFrom() {
+      com.rate.Currency result = com.rate.Currency.valueOf(from_);
+      return result == null ? com.rate.Currency.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.com.rate.Currency from = 2;</code>
+     */
+    public Builder setFrom(com.rate.Currency value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      
+      from_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.com.rate.Currency from = 2;</code>
+     */
+    public Builder clearFrom() {
+      
+      from_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int to_ = 0;
+    /**
+     * <code>.com.rate.Currency to = 3;</code>
+     */
+    public int getToValue() {
+      return to_;
+    }
+    /**
+     * <code>.com.rate.Currency to = 3;</code>
+     */
+    public Builder setToValue(int value) {
+      to_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.com.rate.Currency to = 3;</code>
+     */
+    public com.rate.Currency getTo() {
+      com.rate.Currency result = com.rate.Currency.valueOf(to_);
+      return result == null ? com.rate.Currency.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.com.rate.Currency to = 3;</code>
+     */
+    public Builder setTo(com.rate.Currency value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      
+      to_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.com.rate.Currency to = 3;</code>
+     */
+    public Builder clearTo() {
+      
+      to_ = 0;
+      onChanged();
+      return this;
     }
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {

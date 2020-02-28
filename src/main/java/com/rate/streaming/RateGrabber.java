@@ -14,7 +14,7 @@ public class RateGrabber {
 
     public Rate getRate(String bankName, Currency from, Currency to) {
         float rate = currencyProvider.getRate(from, to).getValue();
-        return Rate.newBuilder().setFromCurrency(from).setToCurrency(to).setValue(rate).build();
+        return Rate.newBuilder().setFrom(from).setTo(to).setValue(rate).build();
     }
 
 }

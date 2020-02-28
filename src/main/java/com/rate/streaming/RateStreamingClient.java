@@ -15,7 +15,7 @@ public class RateStreamingClient {
 
     private static final Map<Currency, Float> buyCurrencyMinLimits = new HashMap<>();
 
-    private static User user = new User(10000);
+//    private static User user = new User(10000);
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -24,16 +24,14 @@ public class RateStreamingClient {
 
         initMinValues();
 
-
-
         Semaphore exitSemaphore = new Semaphore(0);
         System.err.println(1);
         StreamObserver<RateRequest> requestStream = stub.observe(new StreamObserver<RateResponse>() {
             @Override
             public void onNext(RateResponse rateResponse) {
                 System.err.println(6);
-                printUserMoney();
-                buyMoneyByUah(rateResponse);
+//                printUserMoney();
+//                buyMoneyByUah(rateResponse);
                 System.out.printf("Rate: %s%n", rateResponse);
             }
 
@@ -49,14 +47,13 @@ public class RateStreamingClient {
                 exitSemaphore.release();
             }
         });
-        for (int i = 0; i < 5; i++) {
-            RateRequest request = RateRequest.newBuilder()
-                    .setBank(Bank.newBuilder().setName(BankNames.getName())).build();
-            System.out.println(request.getBank().getName());
-            System.err.println(3);
-            requestStream.onNext(request);
-            System.err.println(4);
-        }
+        RateRequest request = RateRequest.newBuilder()
+                .setBank(Bank.newBuilder().setName("Ukrsib")).setFrom(Currency.EUR).setTo(Currency.UAH).build();
+
+        System.out.println(request);
+        System.err.println(3);
+        requestStream.onNext(request);
+        System.err.println(4);
         exitSemaphore.acquire();
 
     }
@@ -67,23 +64,22 @@ public class RateStreamingClient {
         buyCurrencyMinLimits.put(Currency.RUB, 0.45f);
     }
 
-    public static void buyMoneyByUah(RateResponse rateResponse) {
-        float currentPrice = rateResponse.getCurrencies(0).getValue() * AMOUNT_OF_CURRENCY;
-        Currency currencyType = rateResponse.getCurrencies(0).getToCurrency();
-
-        if (user.getUah() >= currentPrice && rateResponse.getCurrencies(0).getValue() <= buyCurrencyMinLimits.get(currencyType)) {
-            user.increasedCurrency(currencyType, AMOUNT_OF_CURRENCY);
-            user.decreaseUah(currentPrice);
-        }
-    }
-
-    public static void printUserMoney() {
-        System.out.println("User UAH: " + user.getUah());
-        System.out.println("User USD: " + user.getCurrencies().get(Currency.USD));
-        System.out.println("User EUR: " + user.getCurrencies().get(Currency.EUR));
-        System.out.println("User RUB: " + user.getCurrencies().get(Currency.RUB));
-    }
-
+//    public static void buyMoneyByUah(RateResponse rateResponse) {
+//        float currentPrice = rateResponse.getCurrencies(0).getValue() * AMOUNT_OF_CURRENCY;
+//        Currency currencyType = rateResponse.getCurrencies(0).getToCurrency();
+//
+//        if (user.getUah() >= currentPrice && rateResponse.getCurrencies(0).getValue() <= buyCurrencyMinLimits.get(currencyType)) {
+//            user.increasedCurrency(currencyType, AMOUNT_OF_CURRENCY);
+//            user.decreaseUah(currentPrice);
+//        }
+//    }
+//
+//    public static void printUserMoney() {
+//        System.out.println("User UAH: " + user.getUah());
+//        System.out.println("User USD: " + user.getCurrencies().get(Currency.USD));
+//        System.out.println("User EUR: " + user.getCurrencies().get(Currency.EUR));
+//        System.out.println("User RUB: " + user.getCurrencies().get(Currency.RUB));
+//    }
 
 
 }

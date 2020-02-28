@@ -11,11 +11,8 @@ public class RateStreamingServer {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        RateUSDStreamingService usdService = new RateUSDStreamingService();
-        RateEuroStreamingService euroService = new RateEuroStreamingService();
-        RateRubStreamingService rubService = new RateRubStreamingService();
-
-        RateStreamingService rateService = new RateStreamingService(usdService, euroService, rubService);
+        UkrsibStreamingService ukrSibRateStreamingService = new UkrsibStreamingService();
+        RateStreamingService rateService = new RateStreamingService(ukrSibRateStreamingService);
         Server rateServer = NettyServerBuilder.forPort(8090).addService(rateService).build().start();
 
         Runtime.getRuntime().addShutdownHook(new Thread(rateServer::shutdownNow));

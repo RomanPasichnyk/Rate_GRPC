@@ -1,8 +1,9 @@
 package com.rate.streaming;
 
 import com.rate.Currency;
+import com.rate.Rate;
 
-public class UkrsibRateGrabber implements BankDecorator {
+public class UkrsibRateGrabber implements BankGrabber {
 
     public static final String UKRSIB_BANK_NAME = "Ukrsib";
     private RateGrabber rateGrabber;
@@ -12,8 +13,8 @@ public class UkrsibRateGrabber implements BankDecorator {
     }
 
     @Override
-    public void getRate(Currency from, Currency to) {
-        rateGrabber.getRate(UKRSIB_BANK_NAME, from, to);
+    public Rate getRate(Currency from, Currency to) {
+        return rateGrabber.getRate(UKRSIB_BANK_NAME, from, to);
     }
 
 }

@@ -19,4 +19,22 @@ public interface RateRequestOrBuilder extends
    * <code>.com.rate.Bank bank = 1;</code>
    */
   com.rate.BankOrBuilder getBankOrBuilder();
+
+  /**
+   * <code>.com.rate.Currency from = 2;</code>
+   */
+  int getFromValue();
+  /**
+   * <code>.com.rate.Currency from = 2;</code>
+   */
+  com.rate.Currency getFrom();
+
+  /**
+   * <code>.com.rate.Currency to = 3;</code>
+   */
+  int getToValue();
+  /**
+   * <code>.com.rate.Currency to = 3;</code>
+   */
+  com.rate.Currency getTo();
 }

@@ -9,11 +9,15 @@ import java.util.Map;
 
 public class CurrencyProvider {
 
-    Map<Currency, Float> rateToUSD = new HashMap<>();
+    private final Map<Currency, Float> rateToUSD = new HashMap<>();
 
-    public Rate getRate(Currency fromCurrency, Currency toCurrency) {
-        float value = rateToUSD.get(toCurrency) / rateToUSD.get(fromCurrency);
-        return Rate.newBuilder().setFromCurrency(fromCurrency).setToCurrency(toCurrency).setValue(value).build();
+    public CurrencyProvider() {
+        initRateToUSD();
+    }
+
+    public Rate getRate(Currency from, Currency to) {
+        float value = rateToUSD.get(to) / rateToUSD.get(from);
+        return Rate.newBuilder().setFromCurrency(from).setToCurrency(to).setValue(value).build();
     }
 
     public void initRateToUSD() {

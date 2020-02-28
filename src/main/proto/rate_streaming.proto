@@ -6,6 +6,8 @@ package com.rate;
 
 message RateRequest{
     Bank bank = 1;
+    Currency from = 2;
+    Currency to = 3;
 }
 
 message Bank {
@@ -23,8 +25,8 @@ enum Currency {
 }
 
 message Rate {
-    Currency fromCurrency = 1;
-    Currency toCurrency = 2;
+    Currency from = 1;
+    Currency to = 2;
     float value = 3;
 }
 

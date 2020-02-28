@@ -3,6 +3,7 @@ package com.rate.streaming;
 import com.google.common.collect.ImmutableList;
 import com.rate.*;
 import com.rate.RateResponse.Builder;
+import com.rate.providers.CurrencyProvider;
 import io.grpc.stub.StreamObserver;
 
 import java.util.List;
@@ -14,14 +15,10 @@ import static java.util.Arrays.asList;
 
 public class RateStreamingService extends RateStreamingServiceGrpc.RateStreamingServiceImplBase {
 
-    private final RateUSDStreamingService usdService;
-    private final RateEuroStreamingService euroService;
-    private final RateRubStreamingService rubService;
+    private final UkrsibStreamingService ukrsibStreamingService;
 
-    public RateStreamingService(RateUSDStreamingService usdService, RateEuroStreamingService euroService, RateRubStreamingService rubService) {
-        this.usdService = usdService;
-        this.euroService = euroService;
-        this.rubService = rubService;
+    public RateStreamingService(UkrsibStreamingService ukrsibStreamingService) {
+        this.ukrsibStreamingService = ukrsibStreamingService;
     }
 
     @Override
@@ -29,22 +26,23 @@ public class RateStreamingService extends RateStreamingServiceGrpc.RateStreaming
 
         System.err.println(2);
         AutoClosableLock lock = new AutoClosableLock(new ReentrantLock());
-        StreamObserver<Bank> rateUSDClientStream =
-                usdService.observe(newStreamObserver(responseObserver, lock, Builder::addCurrencies));
-        StreamObserver<Bank> rateEuroClientStream =
-                euroService.observe(newStreamObserver(responseObserver, lock, Builder::addCurrencies));
-        StreamObserver<Bank> rateRubClientStream =
-                rubService.observe(newStreamObserver(responseObserver, lock, Builder::addCurrencies));
 
-        List<StreamObserver<Bank>> clientsStreams =
-                ImmutableList.copyOf(asList(rateUSDClientStream, rateEuroClientStream, rateRubClientStream));
+//        StreamObserver<RateRequest> ukrSibClientStream =
+//                UkrsibRateGrabber.observe(newStreamObserver(responseObserver, lock, Builder::addCurrencies));
+
+        StreamObserver<RateRequest> ukrsibClientStream = ukrsibStreamingService.observe(newStreamObserver(responseObserver, lock, Builder::addCurrencies));
+
+
+
+        List<StreamObserver<RateRequest>> clientsStreams =
+                ImmutableList.copyOf(asList(ukrsibClientStream));
 
 
         return new StreamObserver<RateRequest>() {
             @Override
             public void onNext(RateRequest rateRequest) {
                 System.err.println(5);
-                clientsStreams.forEach(s -> s.onNext(rateRequest.getBank()));
+                clientsStreams.forEach(s -> s.onNext(rateRequest));
             }
 
             @Override
