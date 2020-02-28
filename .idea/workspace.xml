@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cadac884-7b9f-409f-b906-ebc056fe2229" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/BankNames.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/providers/CurrencyProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rate/providers/CurrencyProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/streaming/BankGrabber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rate/streaming/BankGrabber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateGrabber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateGrabber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateStreamingClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateStreamingClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateStreamingServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateStreamingServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateStreamingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateStreamingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateValuesStreamer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rate/streaming/RateValuesStreamer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/streaming/UkrsibRateGrabber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rate/streaming/UkrsibRateGrabber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rate/streaming/UkrsibStreamingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rate/streaming/UkrsibStreamingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/proto/rate_streaming.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/proto/rate_streaming.proto" afterDir="false" />
-    </list>
+    <list default="true" id="cadac884-7b9f-409f-b906-ebc056fe2229" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
