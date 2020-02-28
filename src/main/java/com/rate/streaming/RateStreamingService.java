@@ -15,10 +15,14 @@ import static java.util.Arrays.asList;
 
 public class RateStreamingService extends RateStreamingServiceGrpc.RateStreamingServiceImplBase {
 
-    private final UkrsibStreamingService ukrsibStreamingService;
+//    private final UkrsibStreamingService ukrsibStreamingService;
 
-    public RateStreamingService(UkrsibStreamingService ukrsibStreamingService) {
-        this.ukrsibStreamingService = ukrsibStreamingService;
+    private final UkrsibRateGrabber ukrsibRateGrabber;
+    private final PrivatRateGrabber privatRateGrabber;
+
+    public RateStreamingService(UkrsibRateGrabber ukrsibRateGrabber, PrivatRateGrabber privatRateGrabber) {
+        this.ukrsibRateGrabber = ukrsibRateGrabber;
+        this.privatRateGrabber = privatRateGrabber;
     }
 
     @Override
@@ -30,18 +34,21 @@ public class RateStreamingService extends RateStreamingServiceGrpc.RateStreaming
 //        StreamObserver<RateRequest> ukrSibClientStream =
 //                UkrsibRateGrabber.observe(newStreamObserver(responseObserver, lock, Builder::addCurrencies));
 
-        StreamObserver<RateRequest> ukrsibClientStream = ukrsibStreamingService.observe(newStreamObserver(responseObserver, lock, Builder::addCurrencies));
+//        StreamObserver<RateRequest> ukrsibClientStream = ukrsibStreamingService.observe(newStreamObserver(responseObserver, lock, Builder::addCurrencies));
 
+        StreamObserver<RateRequest> ukrsibClientStream = ukrsibRateGrabber.getRate(newStreamObserver(responseObserver, lock, Builder::addCurrencies));
 
+        StreamObserver<RateRequest> privatClientStream = privatRateGrabber.getRate(newStreamObserver(responseObserver, lock, Builder::addCurrencies));
 
         List<StreamObserver<RateRequest>> clientsStreams =
-                ImmutableList.copyOf(asList(ukrsibClientStream));
+                ImmutableList.copyOf(asList(ukrsibClientStream, privatClientStream));
 
 
         return new StreamObserver<RateRequest>() {
             @Override
             public void onNext(RateRequest rateRequest) {
                 System.err.println(5);
+                System.out.println(rateRequest.getBank().getName());
                 clientsStreams.forEach(s -> s.onNext(rateRequest));
             }
 

@@ -1,8 +1,10 @@
 package com.rate.providers;
 
+import com.rate.Bank;
 import com.rate.Currency;
 import com.rate.Rate;
 import com.rate.RateResponse;
+import com.rate.streaming.BankGrabber;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,8 +17,15 @@ public class CurrencyProvider {
         initRateToUSD();
     }
 
-    public Rate getRate(Currency from, Currency to) {
+    public Rate getRate(Currency from, Currency to, String bankName) {
+
         float value = rateToUSD.get(to) / rateToUSD.get(from);
+        if (bankName.equals("UKRSIB")) {
+            value += value * 0.15f;
+        } else if (bankName.equals("PRIVAT")) {
+            value += value * 0.18f;
+        }
+
         return Rate.newBuilder().setFrom(from).setTo(to).setValue(value).build();
     }
 

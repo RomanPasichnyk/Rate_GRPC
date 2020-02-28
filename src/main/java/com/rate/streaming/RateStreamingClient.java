@@ -15,7 +15,7 @@ public class RateStreamingClient {
 
     private static final Map<Currency, Float> buyCurrencyMinLimits = new HashMap<>();
 
-//    private static User user = new User(10000);
+    private static User user = new User(10000);
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -48,11 +48,15 @@ public class RateStreamingClient {
             }
         });
         RateRequest request = RateRequest.newBuilder()
-                .setBank(Bank.newBuilder().setName("Ukrsib")).setFrom(Currency.EUR).setTo(Currency.UAH).build();
+                .setBank(Bank.newBuilder().setName("UKRSIB")).setFrom(Currency.EUR).setTo(Currency.UAH).build();
 
-        System.out.println(request);
+//        System.out.println(request);
         System.err.println(3);
         requestStream.onNext(request);
+
+//        request = RateRequest.newBuilder().setBank(Bank.newBuilder().setName("PRIVAT")).setFrom(Currency.EUR).setTo(Currency.UAH).build();
+//        requestStream.onNext(request);
+
         System.err.println(4);
         exitSemaphore.acquire();
 

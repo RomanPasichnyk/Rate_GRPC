@@ -10,6 +10,8 @@ message RateRequest{
     Currency to = 3;
 }
 
+
+
 message Bank {
     string name = 1;
 }

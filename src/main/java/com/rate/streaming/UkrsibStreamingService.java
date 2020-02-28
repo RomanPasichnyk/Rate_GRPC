@@ -1,5 +1,6 @@
 package com.rate.streaming;
 
+import com.rate.Bank;
 import com.rate.Rate;
 import com.rate.RateRequest;
 import com.rate.providers.CurrencyProvider;

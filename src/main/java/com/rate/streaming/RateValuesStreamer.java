@@ -21,7 +21,8 @@ public class RateValuesStreamer {
 
         long randomDelayInMillis = TimeUnit.SECONDS.toMillis(1 + new Random().nextInt(4));
         Timer timer = new Timer();
-        timer.schedule(new RateValuesStreamer.GenerateValueTask(), randomDelayInMillis, randomDelayInMillis);
+        timer.schedule(new GenerateValueTask(), randomDelayInMillis, randomDelayInMillis);
+
     }
 
     StreamObserver<RateRequest> stream(StreamObserver<Rate> responseObserver) {
@@ -30,7 +31,7 @@ public class RateValuesStreamer {
         return new StreamObserver<RateRequest>() {
             @Override
             public void onNext(RateRequest rateRequest) {
-                responseObserver.onNext(currencyProvider.getRate(rateRequest.getFrom(), rateRequest.getTo()));
+                responseObserver.onNext(currencyProvider.getRate(rateRequest.getFrom(), rateRequest.getTo(), rateRequest.getBank().getName()));
             }
 
             @Override
@@ -48,7 +49,7 @@ public class RateValuesStreamer {
     private class GenerateValueTask extends TimerTask {
         @Override
         public void run() {
-            Rate value = currencyProvider.getRate(Currency.USD, Currency.USD);
+            Rate value = currencyProvider.getRate(Currency.USD, Currency.USD, "UKRSIB");
             observers.forEach(o -> o.onNext(value));
         }
     }

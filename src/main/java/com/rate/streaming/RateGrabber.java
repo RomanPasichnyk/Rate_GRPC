@@ -2,19 +2,23 @@ package com.rate.streaming;
 
 import com.rate.Currency;
 import com.rate.Rate;
+import com.rate.RateRequest;
 import com.rate.providers.CurrencyProvider;
+import io.grpc.stub.StreamObserver;
 
 public class RateGrabber {
 
-    CurrencyProvider currencyProvider;
+    private final RateValuesStreamer rateValuesStreamer = new RateValuesStreamer(new CurrencyProvider());
 
-    public RateGrabber(CurrencyProvider currencyProvider) {
-        this.currencyProvider = currencyProvider;
+    public RateGrabber() {
+
     }
 
-    public Rate getRate(String bankName, Currency from, Currency to) {
-        float rate = currencyProvider.getRate(from, to).getValue();
-        return Rate.newBuilder().setFrom(from).setTo(to).setValue(rate).build();
-    }
+    //    public StreamObserver<RateRequest> getRate(String bankName, Currency from, Currency to) {
+//    public StreamObserver<RateRequest> getRate(StreamObserver<Rate> responseObserver, BankGrabber bank) {
+////        float rate = currencyProvider.getRate(from, to).getValue();
+//        return rateValuesStreamer.stream(responseObserver, bank);
+////        return Rate.newBuilder().setFrom(from).setTo(to).setValue(rate).build();
+//    }
 
 }
