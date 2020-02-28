@@ -15,23 +15,31 @@ public class RateValuesStreamer {
 
     private final Set<StreamObserver<Rate>> observers = ConcurrentHashMap.newKeySet();
     private final CurrencyProvider currencyProvider;
+    private GenerateValueTask generateValueTask;
 
     public RateValuesStreamer(CurrencyProvider currencyProvider) {
         this.currencyProvider = currencyProvider;
 
-        long randomDelayInMillis = TimeUnit.SECONDS.toMillis(1 + new Random().nextInt(4));
-        Timer timer = new Timer();
-        timer.schedule(new GenerateValueTask(), randomDelayInMillis, randomDelayInMillis);
-
     }
 
     StreamObserver<RateRequest> stream(StreamObserver<Rate> responseObserver) {
-        observers.add(responseObserver);
+//        observers.add(responseObserver);
 
         return new StreamObserver<RateRequest>() {
             @Override
             public void onNext(RateRequest rateRequest) {
-                responseObserver.onNext(currencyProvider.getRate(rateRequest.getFrom(), rateRequest.getTo(), rateRequest.getBank().getName()));
+                if (generateValueTask == null) {
+                    generateValueTask = new GenerateValueTask(rateRequest.getFrom(), rateRequest.getTo(), rateRequest.getBank().getName());
+                    generateValueTask.init();
+                }
+                else {
+                    generateValueTask.setBankName(rateRequest.getBank().getName());
+                    generateValueTask.setFrom(rateRequest.getFrom());
+                    generateValueTask.setTo(rateRequest.getTo());
+                }
+
+                generateValueTask.addOberverIfAbsent(responseObserver);
+//                responseObserver.onNext(currencyProvider.getRate(rateRequest.getFrom(), rateRequest.getTo(), rateRequest.getBank().getName()));
             }
 
             @Override
@@ -46,13 +54,13 @@ public class RateValuesStreamer {
         };
     }
 
-    private class GenerateValueTask extends TimerTask {
-        @Override
-        public void run() {
-            Rate value = currencyProvider.getRate(Currency.USD, Currency.USD, "UKRSIB");
-            observers.forEach(o -> o.onNext(value));
-        }
-    }
+//    private class GenerateValueTask extends TimerTask {
+//        @Override
+//        public void run() {
+//            Rate value = currencyProvider.getRate(Currency.USD, Currency.USD, "UKRSIB");
+//            observers.forEach(o -> o.onNext(value));
+//        }
+//    }
 
 
 }
