@@ -31,11 +31,6 @@ public class RateStreamingService extends RateStreamingServiceGrpc.RateStreaming
         System.err.println(2);
         AutoClosableLock lock = new AutoClosableLock(new ReentrantLock());
 
-//        StreamObserver<RateRequest> ukrSibClientStream =
-//                UkrsibRateGrabber.observe(newStreamObserver(responseObserver, lock, Builder::addCurrencies));
-
-//        StreamObserver<RateRequest> ukrsibClientStream = ukrsibStreamingService.observe(newStreamObserver(responseObserver, lock, Builder::addCurrencies));
-
         StreamObserver<RateRequest> ukrsibClientStream = ukrsibRateGrabber.getRate(newStreamObserver(responseObserver, lock, Builder::addCurrencies));
 
         StreamObserver<RateRequest> privatClientStream = privatRateGrabber.getRate(newStreamObserver(responseObserver, lock, Builder::addCurrencies));

@@ -48,14 +48,16 @@ public class RateStreamingClient {
                 exitSemaphore.release();
             }
         });
-        RateRequest request = RateRequest.newBuilder()
-                .setBank(Bank.newBuilder().setName("UKRSIB")).setFrom(Currency.EUR).setTo(Currency.UAH).build();
-        RateRequest request2 = RateRequest.newBuilder()
-                .setBank(Bank.newBuilder().setName("PRIVAT")).setFrom(Currency.USD).setTo(Currency.UAH).build();
-
         System.err.println(3);
+
+        RateRequest request = RateRequest.newBuilder()
+                .setBank(Bank.newBuilder().setName("PRIVAT")).setFrom(Currency.EUR).setTo(Currency.USD).build();
         requestStream.onNext(request);
-        requestStream.onNext(request2);
+
+        request = RateRequest.newBuilder()
+                .setBank(Bank.newBuilder().setName("UKRSIB")).setFrom(Currency.USD).setTo(Currency.UAH).build();
+        requestStream.onNext(request);
+
 
         System.err.println(4);
         exitSemaphore.acquire();
