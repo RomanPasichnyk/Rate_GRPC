@@ -29,10 +29,11 @@ public class RateStreamingClient {
         StreamObserver<RateRequest> requestStream = stub.observe(new StreamObserver<RateResponse>() {
             @Override
             public void onNext(RateResponse rateResponse) {
+                printRates(rateResponse);
                 System.err.println(6);
 //                printUserMoney();
 //                buyMoneyByUah(rateResponse);
-                System.out.printf("Rate: %s%n", rateResponse);
+//                System.out.printf("Rate: %s%n", rateResponse);
             }
 
             @Override
@@ -49,13 +50,12 @@ public class RateStreamingClient {
         });
         RateRequest request = RateRequest.newBuilder()
                 .setBank(Bank.newBuilder().setName("UKRSIB")).setFrom(Currency.EUR).setTo(Currency.UAH).build();
+        RateRequest request2 = RateRequest.newBuilder()
+                .setBank(Bank.newBuilder().setName("PRIVAT")).setFrom(Currency.USD).setTo(Currency.UAH).build();
 
-//        System.out.println(request);
         System.err.println(3);
         requestStream.onNext(request);
-
-//        request = RateRequest.newBuilder().setBank(Bank.newBuilder().setName("PRIVAT")).setFrom(Currency.EUR).setTo(Currency.UAH).build();
-//        requestStream.onNext(request);
+        requestStream.onNext(request2);
 
         System.err.println(4);
         exitSemaphore.acquire();
@@ -66,6 +66,14 @@ public class RateStreamingClient {
         buyCurrencyMinLimits.put(Currency.EUR, 28f);
         buyCurrencyMinLimits.put(Currency.USD, 26f);
         buyCurrencyMinLimits.put(Currency.RUB, 0.45f);
+    }
+
+    public static void printRates(RateResponse rateResponse) {
+        System.out.println("Rate: {");
+        System.out.println(" From: " + rateResponse.getCurrencies(0).getFrom());
+        System.out.println(" To: " + rateResponse.getCurrencies(0).getTo());
+        System.out.println(" Value: " + rateResponse.getCurrencies(0).getValue());
+        System.out.println("}");
     }
 
 //    public static void buyMoneyByUah(RateResponse rateResponse) {

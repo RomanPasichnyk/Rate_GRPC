@@ -8,10 +8,13 @@ import com.rate.streaming.BankGrabber;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class CurrencyProvider {
 
     private final Map<Currency, Float> rateToUSD = new HashMap<>();
+
+    private final Map<String, Float> bankRates = new HashMap<>();
 
     public CurrencyProvider() {
         initRateToUSD();
@@ -19,14 +22,24 @@ public class CurrencyProvider {
 
     public Rate getRate(Currency from, Currency to, String bankName) {
 
+        Random random = new Random();
+
         float value = rateToUSD.get(to) / rateToUSD.get(from);
-        if (bankName.equals("UKRSIB")) {
-            value += value * 0.15f;
-        } else if (bankName.equals("PRIVAT")) {
-            value += value * 0.18f;
-        }
+        initBankRates(value);
+        value += bankRates.get(bankName);
+
+//        if (bankName.equals("UKRSIB")) {
+//            value += value * 0.15f;
+//        } else if (bankName.equals("PRIVAT")) {
+//            value += value * 0.18f;
+//        }
 
         return Rate.newBuilder().setFrom(from).setTo(to).setValue(value).build();
+    }
+
+    public void initBankRates(float value) {
+        bankRates.put("UKRSIB", value * 0.15f);
+        bankRates.put("PRIVAT", value * 0.18f);
     }
 
     public void initRateToUSD() {
