@@ -58,6 +58,10 @@ public class RateStreamingClient {
                 .setBank(Bank.newBuilder().setName("UKRSIB")).setFrom(Currency.USD).setTo(Currency.UAH).build();
         requestStream.onNext(request);
 
+        request = RateRequest.newBuilder()
+                .setBank(Bank.newBuilder().setName("PRIVAT")).setFrom(Currency.UAH).setTo(Currency.RUB).build();
+        requestStream.onNext(request);
+
 
         System.err.println(4);
         exitSemaphore.acquire();

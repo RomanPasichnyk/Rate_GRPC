@@ -8,11 +8,11 @@ import io.grpc.stub.StreamObserver;
 
 public class RateGrabber {
 
-    private final RateValuesStreamer rateValuesStreamer = new RateValuesStreamer(new CurrencyProvider());
-
-    public RateGrabber() {
-
-    }
+//    private final RateValuesStreamer rateValuesStreamer = new RateValuesStreamer(new CurrencyProvider());
+//
+//    public RateGrabber() {
+//
+//    }
 
     //    public StreamObserver<RateRequest> getRate(String bankName, Currency from, Currency to) {
 //    public StreamObserver<RateRequest> getRate(StreamObserver<Rate> responseObserver, BankGrabber bank) {

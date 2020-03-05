@@ -30,8 +30,9 @@ public class RateValuesStreamer {
                     generateValueTask.setFrom(rateRequest.getFrom());
                     generateValueTask.setTo(rateRequest.getTo());
                 }
-
+                generateValueTask.addRequest(rateRequest);
                 generateValueTask.addObserverIfAbsent(responseObserver);
+
 //                responseObserver.onNext(currencyProvider.getRate(rateRequest.getFrom(), rateRequest.getTo(), rateRequest.getBank().getName()));
             }
 

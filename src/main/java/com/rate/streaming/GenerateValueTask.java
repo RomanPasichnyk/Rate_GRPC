@@ -1,15 +1,11 @@
 package com.rate.streaming;
 
+import com.rate.*;
 import com.rate.Currency;
-import com.rate.Rate;
-import com.rate.RateRequest;
 import com.rate.providers.CurrencyProvider;
 import io.grpc.stub.StreamObserver;
 
-import java.util.Random;
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -22,11 +18,13 @@ public class GenerateValueTask extends TimerTask {
     private boolean isScheduled = false;
 
     private CurrencyProvider currencyProvider = new CurrencyProvider();
+    private final Set<RateRequest> rateRequests = new HashSet<>();
 
     public GenerateValueTask(Currency from, Currency to, String bankName) {
         this.from = from;
         this.to = to;
         this.bankName = bankName;
+//        rateRequests.add(RateRequest.newBuilder().setFrom(from).setTo(to).setBank(Bank.newBuilder().setName(bankName)).build());
     }
 
     public Currency getFrom() {
@@ -59,17 +57,24 @@ public class GenerateValueTask extends TimerTask {
 
     @Override
     public void run() {
-        Rate value = currencyProvider.getRate(from, to, bankName);
-        observers.forEach(o -> o.onNext(value));
+        for (RateRequest rateRequest : rateRequests) {
+            System.out.println("Bank name TEST TEST " + rateRequest.getBank().getName());
+            Rate value = currencyProvider.getRate(rateRequest.getFrom(), rateRequest.getTo(), rateRequest.getBank().getName());
+            observers.forEach(o -> o.onNext(value));
+        }
     }
 
-    public void init () {
+    public void init() {
         if (!isScheduled) {
             long randomDelayInMillis = TimeUnit.SECONDS.toMillis(1 + new Random().nextInt(4));
             Timer timer = new Timer();
             timer.schedule(this, randomDelayInMillis, randomDelayInMillis);
             isScheduled = true;
         }
+    }
+
+    public void addRequest(RateRequest rateRequest) {
+        rateRequests.add(rateRequest);
     }
 
 
