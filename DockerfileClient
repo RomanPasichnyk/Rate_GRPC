@@ -1,0 +1,5 @@
+FROM openjdk:11
+
+ARG JAR_FILE=/target/*.jar
+COPY ${JAR_FILE} Rate-1.0-SNAPSHOT-jar-with-dependencies.jar
+CMD java -classpath Rate-1.0-SNAPSHOT-jar-with-dependencies.jar com.rate.streaming.RateStreamingClient
