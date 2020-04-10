@@ -1,14 +1,19 @@
 package com.rate.streaming;
 
-import com.rate.*;
+import com.rate.Rate;
+import com.rate.RateRequest;
 import com.rate.providers.CurrencyProvider;
 import io.grpc.stub.StreamObserver;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class RateValuesStreamer {
 
 //    private final Set<StreamObserver<Rate>> observers = ConcurrentHashMap.newKeySet();
     private final CurrencyProvider currencyProvider;
     private GenerateValueTask generateValueTask;
+
+    private final ExecutorService executorService = Executors.newCachedThreadPool();
 
     public RateValuesStreamer(CurrencyProvider currencyProvider) {
         this.currencyProvider = currencyProvider;
@@ -23,7 +28,7 @@ public class RateValuesStreamer {
             public void onNext(RateRequest rateRequest) {
                 if (generateValueTask == null) {
                     generateValueTask = new GenerateValueTask(rateRequest.getFrom(), rateRequest.getTo(), rateRequest.getBank().getName());
-                    generateValueTask.init();
+                    executorService.submit(generateValueTask);
                 }
                 else {
                     generateValueTask.setBankName(rateRequest.getBank().getName());
