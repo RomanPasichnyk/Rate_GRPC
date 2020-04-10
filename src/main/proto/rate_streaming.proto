@@ -17,7 +17,8 @@ message Bank {
 }
 
 message RateResponse {
-    repeated Rate currencies = 1;
+    Rate currencies = 1;
+    Bank bank = 2;
 }
 enum Currency {
     EUR = 0;

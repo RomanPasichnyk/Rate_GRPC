@@ -47,14 +47,15 @@ public final class RateStreaming {
       "Request\022\034\n\004bank\030\001 \001(\0132\016.com.rate.Bank\022 \n" +
       "\004from\030\002 \001(\0162\022.com.rate.Currency\022\036\n\002to\030\003 " +
       "\001(\0162\022.com.rate.Currency\"\024\n\004Bank\022\014\n\004name\030" +
-      "\001 \001(\t\"2\n\014RateResponse\022\"\n\ncurrencies\030\001 \003(" +
-      "\0132\016.com.rate.Rate\"W\n\004Rate\022 \n\004from\030\001 \001(\0162" +
-      "\022.com.rate.Currency\022\036\n\002to\030\002 \001(\0162\022.com.ra" +
-      "te.Currency\022\r\n\005value\030\003 \001(\002*.\n\010Currency\022\007" +
-      "\n\003EUR\020\000\022\007\n\003USD\020\001\022\007\n\003RUB\020\002\022\007\n\003UAH\020\0032T\n\024Ra" +
-      "teStreamingService\022<\n\007observe\022\025.com.rate",
-      ".RateRequest\032\026.com.rate.RateResponse(\0010\001" +
-      "B\014\n\010com.rateP\001b\006proto3"
+      "\001 \001(\t\"P\n\014RateResponse\022\"\n\ncurrencies\030\001 \001(" +
+      "\0132\016.com.rate.Rate\022\034\n\004bank\030\002 \001(\0132\016.com.ra" +
+      "te.Bank\"W\n\004Rate\022 \n\004from\030\001 \001(\0162\022.com.rate" +
+      ".Currency\022\036\n\002to\030\002 \001(\0162\022.com.rate.Currenc" +
+      "y\022\r\n\005value\030\003 \001(\002*.\n\010Currency\022\007\n\003EUR\020\000\022\007\n" +
+      "\003USD\020\001\022\007\n\003RUB\020\002\022\007\n\003UAH\020\0032T\n\024RateStreamin",
+      "gService\022<\n\007observe\022\025.com.rate.RateReque" +
+      "st\032\026.com.rate.RateResponse(\0010\001B\014\n\010com.ra" +
+      "teP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -85,7 +86,7 @@ public final class RateStreaming {
     internal_static_com_rate_RateResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_rate_RateResponse_descriptor,
-        new java.lang.String[] { "Currencies", });
+        new java.lang.String[] { "Currencies", "Bank", });
     internal_static_com_rate_Rate_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_rate_Rate_fieldAccessorTable = new

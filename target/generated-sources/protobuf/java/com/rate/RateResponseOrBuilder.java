@@ -8,26 +8,28 @@ public interface RateResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>repeated .com.rate.Rate currencies = 1;</code>
+   * <code>.com.rate.Rate currencies = 1;</code>
    */
-  java.util.List<com.rate.Rate> 
-      getCurrenciesList();
+  boolean hasCurrencies();
   /**
-   * <code>repeated .com.rate.Rate currencies = 1;</code>
+   * <code>.com.rate.Rate currencies = 1;</code>
    */
-  com.rate.Rate getCurrencies(int index);
+  com.rate.Rate getCurrencies();
   /**
-   * <code>repeated .com.rate.Rate currencies = 1;</code>
+   * <code>.com.rate.Rate currencies = 1;</code>
    */
-  int getCurrenciesCount();
+  com.rate.RateOrBuilder getCurrenciesOrBuilder();
+
   /**
-   * <code>repeated .com.rate.Rate currencies = 1;</code>
+   * <code>.com.rate.Bank bank = 2;</code>
    */
-  java.util.List<? extends com.rate.RateOrBuilder> 
-      getCurrenciesOrBuilderList();
+  boolean hasBank();
   /**
-   * <code>repeated .com.rate.Rate currencies = 1;</code>
+   * <code>.com.rate.Bank bank = 2;</code>
    */
-  com.rate.RateOrBuilder getCurrenciesOrBuilder(
-      int index);
+  com.rate.Bank getBank();
+  /**
+   * <code>.com.rate.Bank bank = 2;</code>
+   */
+  com.rate.BankOrBuilder getBankOrBuilder();
 }

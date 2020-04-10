@@ -1,17 +1,16 @@
 package com.rate.streaming;
 
+import static java.util.Arrays.asList;
 import com.google.common.collect.ImmutableList;
-import com.rate.*;
+import com.rate.RateRequest;
+import com.rate.RateResponse;
 import com.rate.RateResponse.Builder;
-import com.rate.providers.CurrencyProvider;
+import com.rate.RateStreamingServiceGrpc;
 import io.grpc.stub.StreamObserver;
-
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.BiFunction;
-
-import static java.util.Arrays.asList;
 
 public class RateStreamingService extends RateStreamingServiceGrpc.RateStreamingServiceImplBase {
 
@@ -31,9 +30,9 @@ public class RateStreamingService extends RateStreamingServiceGrpc.RateStreaming
         System.err.println(2);
         AutoClosableLock lock = new AutoClosableLock(new ReentrantLock());
 
-        StreamObserver<RateRequest> ukrsibClientStream = ukrsibRateGrabber.getRate(newStreamObserver(responseObserver, lock, Builder::addCurrencies));
+        StreamObserver<RateRequest> ukrsibClientStream = ukrsibRateGrabber.getRate(responseObserver);
 
-        StreamObserver<RateRequest> privatClientStream = privatRateGrabber.getRate(newStreamObserver(responseObserver, lock, Builder::addCurrencies));
+        StreamObserver<RateRequest> privatClientStream = privatRateGrabber.getRate(responseObserver);
 
         List<StreamObserver<RateRequest>> clientsStreams =
                 ImmutableList.copyOf(asList(ukrsibClientStream, privatClientStream));

@@ -1,7 +1,7 @@
 package com.rate.streaming;
 
-import com.rate.Rate;
 import com.rate.RateRequest;
+import com.rate.RateResponse;
 import com.rate.providers.CurrencyProvider;
 import io.grpc.stub.StreamObserver;
 import java.util.concurrent.ExecutorService;
@@ -20,7 +20,7 @@ public class RateValuesStreamer {
 
     }
 
-    StreamObserver<RateRequest> stream(StreamObserver<Rate> responseObserver) {
+    StreamObserver<RateRequest> stream(StreamObserver<RateResponse> responseObserver) {
 //        observers.add(responseObserver);
 
         return new StreamObserver<RateRequest>() {

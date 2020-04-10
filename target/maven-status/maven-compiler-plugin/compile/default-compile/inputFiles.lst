@@ -1,4 +1,3 @@
-D:\Projects\Rate\src\main\java\com\rate\streaming\RateGrabber.java
 D:\Projects\Rate\src\main\java\com\rate\streaming\RateStreamingServer.java
 D:\Projects\Rate\src\main\java\com\rate\streaming\PrivatRateGrabber.java
 D:\Projects\Rate\target\generated-sources\protobuf\java\com\rate\Currency.java
@@ -8,7 +7,6 @@ D:\Projects\Rate\src\main\java\com\rate\streaming\GenerateValueTask.java
 D:\Projects\Rate\target\generated-sources\protobuf\java\com\rate\BankOrBuilder.java
 D:\Projects\Rate\target\generated-sources\protobuf\java\com\rate\RateOrBuilder.java
 D:\Projects\Rate\target\generated-sources\protobuf\java\com\rate\Rate.java
-D:\Projects\Rate\src\main\java\com\rate\streaming\ValuesStreamer.java
 D:\Projects\Rate\target\generated-sources\protobuf\java\com\rate\RateRequest.java
 D:\Projects\Rate\target\generated-sources\protobuf\java\com\rate\RateStreaming.java
 D:\Projects\Rate\src\main\java\com\rate\streaming\UkrsibRateGrabber.java

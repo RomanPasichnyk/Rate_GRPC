@@ -1,28 +1,22 @@
 package com.rate.streaming;
 
-import com.rate.*;
+import com.rate.Bank;
+import com.rate.Currency;
+import com.rate.RateRequest;
+import com.rate.RateResponse;
+import com.rate.RateStreamingServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.netty.NettyChannelBuilder;
 import io.grpc.stub.StreamObserver;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.Semaphore;
 
 public class RateStreamingClient {
-
-    private static final int AMOUNT_OF_CURRENCY = 10;
-
-    private static final Map<Currency, Float> buyCurrencyMinLimits = new HashMap<>();
-
-    private static User user = new User(10000);
 
     public static void main(String[] args) throws InterruptedException {
 
         ManagedChannel channel = NettyChannelBuilder.forAddress("localhost", 8090).usePlaintext(true).build();
         RateStreamingServiceGrpc.RateStreamingServiceStub stub = RateStreamingServiceGrpc.newStub(channel);
 
-        initMinValues();
 
         Semaphore exitSemaphore = new Semaphore(0);
         System.err.println(1);
@@ -68,17 +62,13 @@ public class RateStreamingClient {
 
     }
 
-    public static void initMinValues() {
-        buyCurrencyMinLimits.put(Currency.EUR, 28f);
-        buyCurrencyMinLimits.put(Currency.USD, 26f);
-        buyCurrencyMinLimits.put(Currency.RUB, 0.45f);
-    }
 
     public static void printRates(RateResponse rateResponse) {
         System.out.println("Rate: {");
-        System.out.println(" From: " + rateResponse.getCurrencies(0).getFrom());
-        System.out.println(" To: " + rateResponse.getCurrencies(0).getTo());
-        System.out.println(" Value: " + rateResponse.getCurrencies(0).getValue());
+        System.out.println(" From: " + rateResponse.getCurrencies().getFrom());
+        System.out.println(" To: " + rateResponse.getCurrencies().getTo());
+        System.out.println(" Value: " + rateResponse.getCurrencies().getValue());
+        System.out.println(" Bank: " + rateResponse.getBank().getName());
         System.out.println("}");
     }
 

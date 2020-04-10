@@ -1,8 +1,10 @@
 package com.rate.streaming;
 
+import com.rate.Bank;
 import com.rate.Currency;
 import com.rate.Rate;
 import com.rate.RateRequest;
+import com.rate.RateResponse;
 import com.rate.providers.CurrencyProvider;
 import io.grpc.stub.StreamObserver;
 import java.util.HashSet;
@@ -18,7 +20,7 @@ public class GenerateValueTask implements Runnable {
 
     private String bankName;
 
-    private final Set<StreamObserver<Rate>> observers = ConcurrentHashMap.newKeySet();
+    private final Set<StreamObserver<RateResponse>> observers = ConcurrentHashMap.newKeySet();
 
     private boolean isScheduled = false;
 
@@ -56,7 +58,7 @@ public class GenerateValueTask implements Runnable {
         this.bankName = bankName;
     }
 
-    public void addObserverIfAbsent(StreamObserver<Rate> responseObserver) {
+    public void addObserverIfAbsent(StreamObserver<RateResponse> responseObserver) {
         observers.add(responseObserver);
     }
 
@@ -66,7 +68,8 @@ public class GenerateValueTask implements Runnable {
             if (!Thread.interrupted()) {
                 for (RateRequest rateRequest : rateRequests) {
                     Rate value = currencyProvider.getRate(rateRequest.getFrom(), rateRequest.getTo(), rateRequest.getBank().getName());
-                    observers.forEach(o -> o.onNext(value));
+                    RateResponse rateResponse = RateResponse.newBuilder().setCurrencies(value).setBank(Bank.newBuilder().setName(rateRequest.getBank().getName())).build();
+                    observers.forEach(o -> o.onNext(rateResponse));
                 }
                 try {
                     Thread.sleep(1000 + new Random().nextInt(3000));

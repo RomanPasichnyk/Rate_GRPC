@@ -16,7 +16,6 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private RateResponse() {
-    currencies_ = java.util.Collections.emptyList();
   }
 
   @java.lang.Override
@@ -48,12 +47,29 @@ private static final long serialVersionUID = 0L;
             break;
           }
           case 10: {
-            if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-              currencies_ = new java.util.ArrayList<com.rate.Rate>();
-              mutable_bitField0_ |= 0x00000001;
+            com.rate.Rate.Builder subBuilder = null;
+            if (currencies_ != null) {
+              subBuilder = currencies_.toBuilder();
             }
-            currencies_.add(
-                input.readMessage(com.rate.Rate.parser(), extensionRegistry));
+            currencies_ = input.readMessage(com.rate.Rate.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(currencies_);
+              currencies_ = subBuilder.buildPartial();
+            }
+
+            break;
+          }
+          case 18: {
+            com.rate.Bank.Builder subBuilder = null;
+            if (bank_ != null) {
+              subBuilder = bank_.toBuilder();
+            }
+            bank_ = input.readMessage(com.rate.Bank.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(bank_);
+              bank_ = subBuilder.buildPartial();
+            }
+
             break;
           }
         }
@@ -64,9 +80,6 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
-      if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-        currencies_ = java.util.Collections.unmodifiableList(currencies_);
-      }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
@@ -84,38 +97,45 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int CURRENCIES_FIELD_NUMBER = 1;
-  private java.util.List<com.rate.Rate> currencies_;
+  private com.rate.Rate currencies_;
   /**
-   * <code>repeated .com.rate.Rate currencies = 1;</code>
+   * <code>.com.rate.Rate currencies = 1;</code>
    */
-  public java.util.List<com.rate.Rate> getCurrenciesList() {
-    return currencies_;
+  public boolean hasCurrencies() {
+    return currencies_ != null;
   }
   /**
-   * <code>repeated .com.rate.Rate currencies = 1;</code>
+   * <code>.com.rate.Rate currencies = 1;</code>
    */
-  public java.util.List<? extends com.rate.RateOrBuilder> 
-      getCurrenciesOrBuilderList() {
-    return currencies_;
+  public com.rate.Rate getCurrencies() {
+    return currencies_ == null ? com.rate.Rate.getDefaultInstance() : currencies_;
   }
   /**
-   * <code>repeated .com.rate.Rate currencies = 1;</code>
+   * <code>.com.rate.Rate currencies = 1;</code>
    */
-  public int getCurrenciesCount() {
-    return currencies_.size();
+  public com.rate.RateOrBuilder getCurrenciesOrBuilder() {
+    return getCurrencies();
+  }
+
+  public static final int BANK_FIELD_NUMBER = 2;
+  private com.rate.Bank bank_;
+  /**
+   * <code>.com.rate.Bank bank = 2;</code>
+   */
+  public boolean hasBank() {
+    return bank_ != null;
   }
   /**
-   * <code>repeated .com.rate.Rate currencies = 1;</code>
+   * <code>.com.rate.Bank bank = 2;</code>
    */
-  public com.rate.Rate getCurrencies(int index) {
-    return currencies_.get(index);
+  public com.rate.Bank getBank() {
+    return bank_ == null ? com.rate.Bank.getDefaultInstance() : bank_;
   }
   /**
-   * <code>repeated .com.rate.Rate currencies = 1;</code>
+   * <code>.com.rate.Bank bank = 2;</code>
    */
-  public com.rate.RateOrBuilder getCurrenciesOrBuilder(
-      int index) {
-    return currencies_.get(index);
+  public com.rate.BankOrBuilder getBankOrBuilder() {
+    return getBank();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -130,8 +150,11 @@ private static final long serialVersionUID = 0L;
 
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    for (int i = 0; i < currencies_.size(); i++) {
-      output.writeMessage(1, currencies_.get(i));
+    if (currencies_ != null) {
+      output.writeMessage(1, getCurrencies());
+    }
+    if (bank_ != null) {
+      output.writeMessage(2, getBank());
     }
     unknownFields.writeTo(output);
   }
@@ -141,9 +164,13 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    for (int i = 0; i < currencies_.size(); i++) {
+    if (currencies_ != null) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(1, currencies_.get(i));
+        .computeMessageSize(1, getCurrencies());
+    }
+    if (bank_ != null) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(2, getBank());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -161,8 +188,16 @@ private static final long serialVersionUID = 0L;
     com.rate.RateResponse other = (com.rate.RateResponse) obj;
 
     boolean result = true;
-    result = result && getCurrenciesList()
-        .equals(other.getCurrenciesList());
+    result = result && (hasCurrencies() == other.hasCurrencies());
+    if (hasCurrencies()) {
+      result = result && getCurrencies()
+          .equals(other.getCurrencies());
+    }
+    result = result && (hasBank() == other.hasBank());
+    if (hasBank()) {
+      result = result && getBank()
+          .equals(other.getBank());
+    }
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -174,9 +209,13 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    if (getCurrenciesCount() > 0) {
+    if (hasCurrencies()) {
       hash = (37 * hash) + CURRENCIES_FIELD_NUMBER;
-      hash = (53 * hash) + getCurrenciesList().hashCode();
+      hash = (53 * hash) + getCurrencies().hashCode();
+    }
+    if (hasBank()) {
+      hash = (37 * hash) + BANK_FIELD_NUMBER;
+      hash = (53 * hash) + getBank().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -303,16 +342,21 @@ private static final long serialVersionUID = 0L;
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
-        getCurrenciesFieldBuilder();
       }
     }
     public Builder clear() {
       super.clear();
       if (currenciesBuilder_ == null) {
-        currencies_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
+        currencies_ = null;
       } else {
-        currenciesBuilder_.clear();
+        currencies_ = null;
+        currenciesBuilder_ = null;
+      }
+      if (bankBuilder_ == null) {
+        bank_ = null;
+      } else {
+        bank_ = null;
+        bankBuilder_ = null;
       }
       return this;
     }
@@ -336,15 +380,15 @@ private static final long serialVersionUID = 0L;
 
     public com.rate.RateResponse buildPartial() {
       com.rate.RateResponse result = new com.rate.RateResponse(this);
-      int from_bitField0_ = bitField0_;
       if (currenciesBuilder_ == null) {
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          currencies_ = java.util.Collections.unmodifiableList(currencies_);
-          bitField0_ = (bitField0_ & ~0x00000001);
-        }
         result.currencies_ = currencies_;
       } else {
         result.currencies_ = currenciesBuilder_.build();
+      }
+      if (bankBuilder_ == null) {
+        result.bank_ = bank_;
+      } else {
+        result.bank_ = bankBuilder_.build();
       }
       onBuilt();
       return result;
@@ -387,31 +431,11 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.rate.RateResponse other) {
       if (other == com.rate.RateResponse.getDefaultInstance()) return this;
-      if (currenciesBuilder_ == null) {
-        if (!other.currencies_.isEmpty()) {
-          if (currencies_.isEmpty()) {
-            currencies_ = other.currencies_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-          } else {
-            ensureCurrenciesIsMutable();
-            currencies_.addAll(other.currencies_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.currencies_.isEmpty()) {
-          if (currenciesBuilder_.isEmpty()) {
-            currenciesBuilder_.dispose();
-            currenciesBuilder_ = null;
-            currencies_ = other.currencies_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-            currenciesBuilder_ = 
-              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                 getCurrenciesFieldBuilder() : null;
-          } else {
-            currenciesBuilder_.addAllMessages(other.currencies_);
-          }
-        }
+      if (other.hasCurrencies()) {
+        mergeCurrencies(other.getCurrencies());
+      }
+      if (other.hasBank()) {
+        mergeBank(other.getBank());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -439,246 +463,239 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
-    private int bitField0_;
 
-    private java.util.List<com.rate.Rate> currencies_ =
-      java.util.Collections.emptyList();
-    private void ensureCurrenciesIsMutable() {
-      if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-        currencies_ = new java.util.ArrayList<com.rate.Rate>(currencies_);
-        bitField0_ |= 0x00000001;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilderV3<
+    private com.rate.Rate currencies_ = null;
+    private com.google.protobuf.SingleFieldBuilderV3<
         com.rate.Rate, com.rate.Rate.Builder, com.rate.RateOrBuilder> currenciesBuilder_;
+    /**
+     * <code>.com.rate.Rate currencies = 1;</code>
+     */
+    public boolean hasCurrencies() {
+      return currenciesBuilder_ != null || currencies_ != null;
+    }
+    /**
+     * <code>.com.rate.Rate currencies = 1;</code>
+     */
+    public com.rate.Rate getCurrencies() {
+      if (currenciesBuilder_ == null) {
+        return currencies_ == null ? com.rate.Rate.getDefaultInstance() : currencies_;
+      } else {
+        return currenciesBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.com.rate.Rate currencies = 1;</code>
+     */
+    public Builder setCurrencies(com.rate.Rate value) {
+      if (currenciesBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        currencies_ = value;
+        onChanged();
+      } else {
+        currenciesBuilder_.setMessage(value);
+      }
 
-    /**
-     * <code>repeated .com.rate.Rate currencies = 1;</code>
-     */
-    public java.util.List<com.rate.Rate> getCurrenciesList() {
-      if (currenciesBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(currencies_);
-      } else {
-        return currenciesBuilder_.getMessageList();
-      }
+      return this;
     }
     /**
-     * <code>repeated .com.rate.Rate currencies = 1;</code>
-     */
-    public int getCurrenciesCount() {
-      if (currenciesBuilder_ == null) {
-        return currencies_.size();
-      } else {
-        return currenciesBuilder_.getCount();
-      }
-    }
-    /**
-     * <code>repeated .com.rate.Rate currencies = 1;</code>
-     */
-    public com.rate.Rate getCurrencies(int index) {
-      if (currenciesBuilder_ == null) {
-        return currencies_.get(index);
-      } else {
-        return currenciesBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <code>repeated .com.rate.Rate currencies = 1;</code>
+     * <code>.com.rate.Rate currencies = 1;</code>
      */
     public Builder setCurrencies(
-        int index, com.rate.Rate value) {
-      if (currenciesBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureCurrenciesIsMutable();
-        currencies_.set(index, value);
-        onChanged();
-      } else {
-        currenciesBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .com.rate.Rate currencies = 1;</code>
-     */
-    public Builder setCurrencies(
-        int index, com.rate.Rate.Builder builderForValue) {
-      if (currenciesBuilder_ == null) {
-        ensureCurrenciesIsMutable();
-        currencies_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        currenciesBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .com.rate.Rate currencies = 1;</code>
-     */
-    public Builder addCurrencies(com.rate.Rate value) {
-      if (currenciesBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureCurrenciesIsMutable();
-        currencies_.add(value);
-        onChanged();
-      } else {
-        currenciesBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .com.rate.Rate currencies = 1;</code>
-     */
-    public Builder addCurrencies(
-        int index, com.rate.Rate value) {
-      if (currenciesBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureCurrenciesIsMutable();
-        currencies_.add(index, value);
-        onChanged();
-      } else {
-        currenciesBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .com.rate.Rate currencies = 1;</code>
-     */
-    public Builder addCurrencies(
         com.rate.Rate.Builder builderForValue) {
       if (currenciesBuilder_ == null) {
-        ensureCurrenciesIsMutable();
-        currencies_.add(builderForValue.build());
+        currencies_ = builderForValue.build();
         onChanged();
       } else {
-        currenciesBuilder_.addMessage(builderForValue.build());
+        currenciesBuilder_.setMessage(builderForValue.build());
       }
+
       return this;
     }
     /**
-     * <code>repeated .com.rate.Rate currencies = 1;</code>
+     * <code>.com.rate.Rate currencies = 1;</code>
      */
-    public Builder addCurrencies(
-        int index, com.rate.Rate.Builder builderForValue) {
+    public Builder mergeCurrencies(com.rate.Rate value) {
       if (currenciesBuilder_ == null) {
-        ensureCurrenciesIsMutable();
-        currencies_.add(index, builderForValue.build());
+        if (currencies_ != null) {
+          currencies_ =
+            com.rate.Rate.newBuilder(currencies_).mergeFrom(value).buildPartial();
+        } else {
+          currencies_ = value;
+        }
         onChanged();
       } else {
-        currenciesBuilder_.addMessage(index, builderForValue.build());
+        currenciesBuilder_.mergeFrom(value);
       }
+
       return this;
     }
     /**
-     * <code>repeated .com.rate.Rate currencies = 1;</code>
-     */
-    public Builder addAllCurrencies(
-        java.lang.Iterable<? extends com.rate.Rate> values) {
-      if (currenciesBuilder_ == null) {
-        ensureCurrenciesIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, currencies_);
-        onChanged();
-      } else {
-        currenciesBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .com.rate.Rate currencies = 1;</code>
+     * <code>.com.rate.Rate currencies = 1;</code>
      */
     public Builder clearCurrencies() {
       if (currenciesBuilder_ == null) {
-        currencies_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
+        currencies_ = null;
         onChanged();
       } else {
-        currenciesBuilder_.clear();
+        currencies_ = null;
+        currenciesBuilder_ = null;
       }
+
       return this;
     }
     /**
-     * <code>repeated .com.rate.Rate currencies = 1;</code>
+     * <code>.com.rate.Rate currencies = 1;</code>
      */
-    public Builder removeCurrencies(int index) {
-      if (currenciesBuilder_ == null) {
-        ensureCurrenciesIsMutable();
-        currencies_.remove(index);
-        onChanged();
-      } else {
-        currenciesBuilder_.remove(index);
-      }
-      return this;
+    public com.rate.Rate.Builder getCurrenciesBuilder() {
+      
+      onChanged();
+      return getCurrenciesFieldBuilder().getBuilder();
     }
     /**
-     * <code>repeated .com.rate.Rate currencies = 1;</code>
+     * <code>.com.rate.Rate currencies = 1;</code>
      */
-    public com.rate.Rate.Builder getCurrenciesBuilder(
-        int index) {
-      return getCurrenciesFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <code>repeated .com.rate.Rate currencies = 1;</code>
-     */
-    public com.rate.RateOrBuilder getCurrenciesOrBuilder(
-        int index) {
-      if (currenciesBuilder_ == null) {
-        return currencies_.get(index);  } else {
-        return currenciesBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <code>repeated .com.rate.Rate currencies = 1;</code>
-     */
-    public java.util.List<? extends com.rate.RateOrBuilder> 
-         getCurrenciesOrBuilderList() {
+    public com.rate.RateOrBuilder getCurrenciesOrBuilder() {
       if (currenciesBuilder_ != null) {
-        return currenciesBuilder_.getMessageOrBuilderList();
+        return currenciesBuilder_.getMessageOrBuilder();
       } else {
-        return java.util.Collections.unmodifiableList(currencies_);
+        return currencies_ == null ?
+            com.rate.Rate.getDefaultInstance() : currencies_;
       }
     }
     /**
-     * <code>repeated .com.rate.Rate currencies = 1;</code>
+     * <code>.com.rate.Rate currencies = 1;</code>
      */
-    public com.rate.Rate.Builder addCurrenciesBuilder() {
-      return getCurrenciesFieldBuilder().addBuilder(
-          com.rate.Rate.getDefaultInstance());
-    }
-    /**
-     * <code>repeated .com.rate.Rate currencies = 1;</code>
-     */
-    public com.rate.Rate.Builder addCurrenciesBuilder(
-        int index) {
-      return getCurrenciesFieldBuilder().addBuilder(
-          index, com.rate.Rate.getDefaultInstance());
-    }
-    /**
-     * <code>repeated .com.rate.Rate currencies = 1;</code>
-     */
-    public java.util.List<com.rate.Rate.Builder> 
-         getCurrenciesBuilderList() {
-      return getCurrenciesFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilderV3<
+    private com.google.protobuf.SingleFieldBuilderV3<
         com.rate.Rate, com.rate.Rate.Builder, com.rate.RateOrBuilder> 
         getCurrenciesFieldBuilder() {
       if (currenciesBuilder_ == null) {
-        currenciesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+        currenciesBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
             com.rate.Rate, com.rate.Rate.Builder, com.rate.RateOrBuilder>(
-                currencies_,
-                ((bitField0_ & 0x00000001) == 0x00000001),
+                getCurrencies(),
                 getParentForChildren(),
                 isClean());
         currencies_ = null;
       }
       return currenciesBuilder_;
+    }
+
+    private com.rate.Bank bank_ = null;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.rate.Bank, com.rate.Bank.Builder, com.rate.BankOrBuilder> bankBuilder_;
+    /**
+     * <code>.com.rate.Bank bank = 2;</code>
+     */
+    public boolean hasBank() {
+      return bankBuilder_ != null || bank_ != null;
+    }
+    /**
+     * <code>.com.rate.Bank bank = 2;</code>
+     */
+    public com.rate.Bank getBank() {
+      if (bankBuilder_ == null) {
+        return bank_ == null ? com.rate.Bank.getDefaultInstance() : bank_;
+      } else {
+        return bankBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.com.rate.Bank bank = 2;</code>
+     */
+    public Builder setBank(com.rate.Bank value) {
+      if (bankBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bank_ = value;
+        onChanged();
+      } else {
+        bankBuilder_.setMessage(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.com.rate.Bank bank = 2;</code>
+     */
+    public Builder setBank(
+        com.rate.Bank.Builder builderForValue) {
+      if (bankBuilder_ == null) {
+        bank_ = builderForValue.build();
+        onChanged();
+      } else {
+        bankBuilder_.setMessage(builderForValue.build());
+      }
+
+      return this;
+    }
+    /**
+     * <code>.com.rate.Bank bank = 2;</code>
+     */
+    public Builder mergeBank(com.rate.Bank value) {
+      if (bankBuilder_ == null) {
+        if (bank_ != null) {
+          bank_ =
+            com.rate.Bank.newBuilder(bank_).mergeFrom(value).buildPartial();
+        } else {
+          bank_ = value;
+        }
+        onChanged();
+      } else {
+        bankBuilder_.mergeFrom(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.com.rate.Bank bank = 2;</code>
+     */
+    public Builder clearBank() {
+      if (bankBuilder_ == null) {
+        bank_ = null;
+        onChanged();
+      } else {
+        bank_ = null;
+        bankBuilder_ = null;
+      }
+
+      return this;
+    }
+    /**
+     * <code>.com.rate.Bank bank = 2;</code>
+     */
+    public com.rate.Bank.Builder getBankBuilder() {
+      
+      onChanged();
+      return getBankFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.com.rate.Bank bank = 2;</code>
+     */
+    public com.rate.BankOrBuilder getBankOrBuilder() {
+      if (bankBuilder_ != null) {
+        return bankBuilder_.getMessageOrBuilder();
+      } else {
+        return bank_ == null ?
+            com.rate.Bank.getDefaultInstance() : bank_;
+      }
+    }
+    /**
+     * <code>.com.rate.Bank bank = 2;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.rate.Bank, com.rate.Bank.Builder, com.rate.BankOrBuilder> 
+        getBankFieldBuilder() {
+      if (bankBuilder_ == null) {
+        bankBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.rate.Bank, com.rate.Bank.Builder, com.rate.BankOrBuilder>(
+                getBank(),
+                getParentForChildren(),
+                isClean());
+        bank_ = null;
+      }
+      return bankBuilder_;
     }
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
