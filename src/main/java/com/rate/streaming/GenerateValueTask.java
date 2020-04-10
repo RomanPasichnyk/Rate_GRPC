@@ -14,6 +14,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class GenerateValueTask implements Runnable {
 
+    private static final int NUMBER_1000 = 1000;
+
+    private static final int NUMBER_3000 = 3000;
+
     private Currency from;
 
     private Currency to;
@@ -21,8 +25,6 @@ public class GenerateValueTask implements Runnable {
     private String bankName;
 
     private final Set<StreamObserver<RateResponse>> observers = ConcurrentHashMap.newKeySet();
-
-    private boolean isScheduled = false;
 
     private CurrencyProvider currencyProvider = new CurrencyProvider();
 
@@ -68,12 +70,14 @@ public class GenerateValueTask implements Runnable {
             if (!Thread.interrupted()) {
                 for (RateRequest rateRequest : rateRequests) {
                     Rate value = currencyProvider.getRate(rateRequest.getFrom(), rateRequest.getTo(), rateRequest.getBank().getName());
-                    RateResponse rateResponse = RateResponse.newBuilder().setCurrencies(value).setBank(Bank.newBuilder().setName(rateRequest.getBank().getName())).build();
+                    RateResponse rateResponse = RateResponse.newBuilder()
+                        .setCurrencies(value)
+                        .setBank(Bank.newBuilder().setName(rateRequest.getBank().getName())).build();
                     System.out.println(rateResponse);
                     observers.forEach(o -> o.onNext(rateResponse));
                 }
                 try {
-                    Thread.sleep(1000 + new Random().nextInt(3000));
+                    Thread.sleep(NUMBER_1000 + new Random().nextInt(NUMBER_3000));
                 }
                 catch (InterruptedException e) {
                     e.printStackTrace();
@@ -89,6 +93,4 @@ public class GenerateValueTask implements Runnable {
     public void addRequest(RateRequest rateRequest) {
         rateRequests.add(rateRequest);
     }
-
-
 }

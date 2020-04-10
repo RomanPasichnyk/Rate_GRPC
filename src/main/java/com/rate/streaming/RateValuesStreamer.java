@@ -9,36 +9,21 @@ import java.util.concurrent.Executors;
 
 public class RateValuesStreamer {
 
-//    private final Set<StreamObserver<Rate>> observers = ConcurrentHashMap.newKeySet();
     private final CurrencyProvider currencyProvider;
+
     private GenerateValueTask generateValueTask;
 
     private final ExecutorService executorService = Executors.newCachedThreadPool();
 
     public RateValuesStreamer(CurrencyProvider currencyProvider) {
         this.currencyProvider = currencyProvider;
-
     }
 
     StreamObserver<RateRequest> stream(StreamObserver<RateResponse> responseObserver) {
-//        observers.add(responseObserver);
-
-        return new StreamObserver<RateRequest>() {
+        return new StreamObserver<>() {
             @Override
             public void onNext(RateRequest rateRequest) {
-                if (generateValueTask == null) {
-                    generateValueTask = new GenerateValueTask(rateRequest.getFrom(), rateRequest.getTo(), rateRequest.getBank().getName());
-                    executorService.submit(generateValueTask);
-                }
-                else {
-                    generateValueTask.setBankName(rateRequest.getBank().getName());
-                    generateValueTask.setFrom(rateRequest.getFrom());
-                    generateValueTask.setTo(rateRequest.getTo());
-                }
-                generateValueTask.addRequest(rateRequest);
-                generateValueTask.addObserverIfAbsent(responseObserver);
-
-//                responseObserver.onNext(currencyProvider.getRate(rateRequest.getFrom(), rateRequest.getTo(), rateRequest.getBank().getName()));
+                initGenerateValueTask(rateRequest, responseObserver);
             }
 
             @Override
@@ -53,13 +38,17 @@ public class RateValuesStreamer {
         };
     }
 
-//    private class GenerateValueTask extends TimerTask {
-//        @Override
-//        public void run() {
-//            Rate value = currencyProvider.getRate(Currency.USD, Currency.USD, "UKRSIB");
-//            observers.forEach(o -> o.onNext(value));
-//        }
-//    }
-
-
+    private void initGenerateValueTask(RateRequest rateRequest, StreamObserver<RateResponse> responseObserver) {
+        if (generateValueTask == null) {
+            generateValueTask = new GenerateValueTask(rateRequest.getFrom(), rateRequest.getTo(), rateRequest.getBank().getName());
+            executorService.submit(generateValueTask);
+        }
+        else {
+            generateValueTask.setBankName(rateRequest.getBank().getName());
+            generateValueTask.setFrom(rateRequest.getFrom());
+            generateValueTask.setTo(rateRequest.getTo());
+        }
+        generateValueTask.addRequest(rateRequest);
+        generateValueTask.addObserverIfAbsent(responseObserver);
+    }
 }

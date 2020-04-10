@@ -8,22 +8,32 @@ import java.util.Random;
 
 public class CurrencyProvider {
 
-    private final Map<Currency, Float> rateToUSD = new HashMap<>();
+    private static final float RATE_EUR = 0.92f;
+
+    private static final float RATE_RUB = 65.52f;
+
+    private static final float RATE_UAH = 24.57f;
+
+    private final Map<Currency, Float> rateToUsd = new HashMap<>();
 
     private final Map<String, Float> bankRates = new HashMap<>();
 
     public CurrencyProvider() {
-        initRateToUSD();
+        initRateToUsd();
     }
 
+    /**
+     * Method return rate. Param from request.
+     *
+     * @param from     - convert from currency type.
+     * @param to       - convert to currency type.
+     * @param bankName - bank name.
+     * @return - rate.
+     */
     public Rate getRate(Currency from, Currency to, String bankName) {
-
-        Random random = new Random();
-
-        float value = rateToUSD.get(to) / rateToUSD.get(from);
+        float value = rateToUsd.get(to) / rateToUsd.get(from);
         initBankRates(value);
         value += bankRates.get(bankName);
-
         return Rate.newBuilder().setFrom(from).setTo(to).setValue(value).build();
     }
 
@@ -32,11 +42,14 @@ public class CurrencyProvider {
         bankRates.put("PRIVAT", value * new Random().nextFloat());
     }
 
-    public void initRateToUSD() {
-        rateToUSD.put(Currency.EUR, 0.92f);
-        rateToUSD.put(Currency.RUB, 65.52f);
-        rateToUSD.put(Currency.UAH, 24.57f);
-        rateToUSD.put(Currency.USD, 1f);
+    /**
+     * Initialize rate to USD.
+     */
+    public void initRateToUsd() {
+        rateToUsd.put(Currency.EUR, RATE_EUR);
+        rateToUsd.put(Currency.RUB, RATE_RUB);
+        rateToUsd.put(Currency.UAH, RATE_UAH);
+        rateToUsd.put(Currency.USD, 1f);
     }
 
 }
