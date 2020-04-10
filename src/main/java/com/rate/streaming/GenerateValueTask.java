@@ -69,6 +69,7 @@ public class GenerateValueTask implements Runnable {
                 for (RateRequest rateRequest : rateRequests) {
                     Rate value = currencyProvider.getRate(rateRequest.getFrom(), rateRequest.getTo(), rateRequest.getBank().getName());
                     RateResponse rateResponse = RateResponse.newBuilder().setCurrencies(value).setBank(Bank.newBuilder().setName(rateRequest.getBank().getName())).build();
+                    System.out.println(rateResponse);
                     observers.forEach(o -> o.onNext(rateResponse));
                 }
                 try {
